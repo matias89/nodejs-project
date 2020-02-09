@@ -1,14 +1,6 @@
-const server = require('./server');
-const router = require('./router');
-server.init(router.route);
-/*
-const params = process.argv.slice(2);
-let sum = 0;
-for (let i = 0; i < params.length; i++) {
-    sum = sum + parseFloat(params[i]);
-}
-const response = `
- La suma  es ${sum}
-`;
-console.log(response);
-*/
+const myApp = require('./myApp');
+const port = 3001;
+
+myApp.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}...`);
+});
