@@ -15,7 +15,7 @@ myApp.get('/comments', (request, response) => {
 });
 
 myApp.post('/comments', (request, response) => {
-    response.status(200).send({
+    response.status(409).send({
         message: request.body,
         status: 200
     });
