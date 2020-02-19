@@ -1,22 +1,17 @@
 const mongoose = require('mongoose');
 const myApp = require('./myApp');
-const port = 3001;
 const dataDb = require('./data/db.json');
+const UsersModel = require('./models/users');
+
+const port = 3001;
+
 mongoose.Promise = global.Promise;
 
 mongoose.connect('mongodb://localhost:27017/test_com_8_3')
     .then(() => {
         console.log('Connected successfully ...');
-        // Define Schema
-        const userScheme = mongoose.Schema({
-            name: String,
-            lastname: String,
-            email: String
-        });
-        // Pasa Schema a model
-        const User = mongoose.model('User', userScheme);
         // Nueva instancia del documento
-        const matiasUser = new User({
+        const matiasUser = new UsersModel({
             _id: mongoose.Types.ObjectId(),
             name: 'Matías',
             lastname: 'Aybar',
