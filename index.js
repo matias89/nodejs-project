@@ -10,7 +10,8 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/test_com_8_3')
     .then(() => {
         console.log('Connected successfully ...');
-        // Nueva instancia del documento
+        // Nueva instancia del 
+        /*
         const matiasUser = new UsersModel({
             _id: mongoose.Types.ObjectId(),
             name: 'Matías',
@@ -61,7 +62,7 @@ mongoose.connect('mongodb://localhost:27017/test_com_8_3')
                 console.log('new objet create was exit')
             });
         })
-
+        */
         myApp.listen(port, () => {
             console.log(`Server running on http://localhost:${port}...`);
         });
