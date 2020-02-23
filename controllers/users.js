@@ -1,19 +1,38 @@
+const jwt = require('jsonwebtoken');
 const Users = require('../models/users');
 
 const controller = {
     getUsers: (req, res) => {
-        Users.find().exec((error, users) => {
-            if (error) {
-                return res.status(500).send({
-                    message: 'Error en el servidor',
-                    status: 500,
-                })
-            }
-            return res.status(200).send({
-                message: users,
-                status: 200,
-            })
-        });
+        const headers = req.headers;
+        const token = headers['access-token'];
+        if (token) {
+            jwt.verify(token, 'HelloWorld*', (error, success) => {
+                if (error) {
+                    return res.status(401).send({
+                        message: 'El token no es válido.',
+                        status: 401,
+                    });
+                } else {
+                    Users.find().exec((error, users) => {
+                        if (error) {
+                            return res.status(500).send({
+                                message: 'Error en el servidor',
+                                status: 500,
+                            })
+                        }
+                        return res.status(200).send({
+                            message: users,
+                            status: 200,
+                        })
+                    });
+                }
+            });
+        } else {
+            return res.status(401).send({
+                message: 'No existe el token',
+                status: 401,
+            });
+        }
     },
     getUser: (req, res) => {
         const userId = req.params.id;
